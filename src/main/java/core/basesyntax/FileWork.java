@@ -40,6 +40,7 @@ public class FileWork {
 
         String[] words = wText.toString().split(" ");
         Arrays.sort(words);
+
         return words;
     }
 
