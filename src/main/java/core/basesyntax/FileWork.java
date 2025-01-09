@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FileWork {
+    private final int firstIndex = 0;
+
     public String[] readFromFile(String fileName) {
         StringBuilder wText = new StringBuilder();
         List<Character> keySymbols = List.of('.', ',', '!', '?');
@@ -15,18 +17,20 @@ public class FileWork {
             }
 
             String read = file.readLine();
+            int lastIndexInWord;
 
             while (read != null) {
                 String[] words = read.split(" ");
 
                 for (String word : words) {
                     word = word.toLowerCase();
+                    lastIndexInWord = word.length() - 1;
 
-                    if(keySymbols.contains(word.charAt(word.length() - 1))) {
-                        word = word.substring(0, word.length() - 1);
+                    if(keySymbols.contains(word.charAt(lastIndexInWord))) {
+                        word = word.substring(firstIndex, lastIndexInWord);
                     }
 
-                    if(word.charAt(0) == 'w') {
+                    if(word.charAt(firstIndex) == 'w') {
                         wText.append(word).append(" ");
                     }
                 }
@@ -49,9 +53,9 @@ public class FileWork {
     }
 
     private String[] sortedArray(StringBuilder array) {
-        String[] words = array.toString().split(" ");
-        Arrays.sort(words);
+        String[] sortedArray = array.toString().split(" ");
+        Arrays.sort(sortedArray);
 
-        return words;
+        return sortedArray;
     }
 }
