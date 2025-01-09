@@ -37,18 +37,21 @@ public class FileWork {
             e.printStackTrace();
         }
 
-        if(wText.isEmpty()) {
+        if(wText.isEmpty())
             return new String[0];
-        }
 
-        String[] words = wText.toString().split(" ");
-        Arrays.sort(words);
-
-        return words;
+        return sortedArray(wText);
     }
 
     private boolean checkFileEmpty(String fileName) {
         File fw = new File(fileName);
         return fw.length() == 0;
+    }
+
+    private String[] sortedArray(StringBuilder array) {
+        String[] words = array.toString().split(" ");
+        Arrays.sort(words);
+
+        return words;
     }
 }
