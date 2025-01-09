@@ -11,7 +11,7 @@ public class FileWork {
 
     public String[] readFromFile(String fileName) {
         try(BufferedReader file = new BufferedReader(new FileReader(fileName))) {
-            if(checkFileEmpty(fileName)) {
+            if (checkFileEmpty(fileName)) {
                 return new String[firstIndex];
             }
 
@@ -31,7 +31,7 @@ public class FileWork {
             e.printStackTrace();
         }
 
-        if(wText.isEmpty())
+        if (wText.isEmpty())
             return new String[firstIndex];
 
         return sortedArray(wText);
