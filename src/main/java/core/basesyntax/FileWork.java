@@ -6,10 +6,10 @@ import java.util.List;
 
 public class FileWork {
     private final int firstIndex = 0;
+    private final StringBuilder wText = new StringBuilder();
+    private final List<Character> keySymbols = List.of('.', ',', '!', '?');
 
     public String[] readFromFile(String fileName) {
-        StringBuilder wText = new StringBuilder();
-        List<Character> keySymbols = List.of('.', ',', '!', '?');
 
         try(BufferedReader file = new BufferedReader(new FileReader(fileName))) {
             if(checkFileEmpty(fileName)) {
@@ -17,22 +17,13 @@ public class FileWork {
             }
 
             String read = file.readLine();
-            int lastIndexInWord;
 
             while (read != null) {
                 String[] words = read.split(" ");
 
                 for (String word : words) {
-                    word = word.toLowerCase();
-                    lastIndexInWord = word.length() - 1;
-
-                    if(keySymbols.contains(word.charAt(lastIndexInWord))) {
-                        word = word.substring(firstIndex, lastIndexInWord);
-                    }
-
-                    if(word.charAt(firstIndex) == 'w') {
-                        wText.append(word).append(" ");
-                    }
+                    word = checkStringOnLastSymbol(word);
+                    checkAndAppendWWord(word);
                 }
 
                 read = file.readLine();
@@ -57,5 +48,22 @@ public class FileWork {
         Arrays.sort(sortedArray);
 
         return sortedArray;
+    }
+
+    private void checkAndAppendWWord(String word) {
+        if(word.charAt(firstIndex) == 'w') {
+            wText.append(word).append(" ");
+        }
+    }
+
+    private String checkStringOnLastSymbol(String word) {
+        word = word.toLowerCase();
+        int lastIndexInWord = word.length() - 1;
+
+        if(keySymbols.contains(word.charAt(lastIndexInWord))) {
+            return word.substring(firstIndex, lastIndexInWord);
+        }
+
+        return word;
     }
 }
