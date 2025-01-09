@@ -10,7 +10,6 @@ public class FileWork {
     private final List<Character> keySymbols = List.of('.', ',', '!', '?');
 
     public String[] readFromFile(String fileName) {
-
         try(BufferedReader file = new BufferedReader(new FileReader(fileName))) {
             if(checkFileEmpty(fileName)) {
                 return new String[firstIndex];
