@@ -13,7 +13,7 @@ public class FileWork {
 
         try(BufferedReader file = new BufferedReader(new FileReader(fileName))) {
             if(checkFileEmpty(fileName)) {
-                return new String[0];
+                return new String[firstIndex];
             }
 
             String read = file.readLine();
@@ -42,7 +42,7 @@ public class FileWork {
         }
 
         if(wText.isEmpty())
-            return new String[0];
+            return new String[firstIndex];
 
         return sortedArray(wText);
     }
