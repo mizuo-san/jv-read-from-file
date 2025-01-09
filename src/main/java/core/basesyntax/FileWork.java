@@ -26,7 +26,7 @@ public class FileWork {
                     }
 
                     if(word.charAt(0) == 'w') {
-                        wText.append(word.toLowerCase()).append(" ");
+                        wText.append(word).append(" ");
                     }
                 }
 
