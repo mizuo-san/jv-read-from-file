@@ -7,21 +7,22 @@ import java.util.List;
 public class FileWork {
     public String[] readFromFile(String fileName) {
         StringBuilder wText = new StringBuilder();
-        List<Character> ar = List.of('.', ',', '!', '?');
+        List<Character> keySymbols = List.of('.', ',', '!', '?');
 
-        try(BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+        try(BufferedReader file = new BufferedReader(new FileReader(fileName))) {
             if(checkFileEmpty(fileName)) {
                 return new String[0];
             }
 
-            String read = br.readLine();
+            String read = file.readLine();
 
             while (read != null) {
                 String[] words = read.split(" ");
+
                 for (String word : words) {
                     word = word.toLowerCase();
 
-                    if(ar.contains(word.charAt(word.length() - 1))) {
+                    if(keySymbols.contains(word.charAt(word.length() - 1))) {
                         word = word.substring(0, word.length() - 1);
                     }
 
@@ -30,9 +31,11 @@ public class FileWork {
                     }
                 }
 
-                read = br.readLine();
+                read = file.readLine();
             }
-        } catch (IOException e) {}
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         if(wText.isEmpty()) {
             return new String[0];
